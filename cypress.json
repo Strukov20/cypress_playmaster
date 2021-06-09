@@ -1,0 +1,9 @@
+{
+  "baseUrl": "http://localhost:4200",
+  "ignoreTestFiles": "**/examples/*",
+  "viewportHeight": 1080,
+  "viewportWidth": 1920,
+  "chromeWebSecurity": false,
+  "defaultCommandTimeout": 15000,
+  "projectId": "r1zc9u"
+}
