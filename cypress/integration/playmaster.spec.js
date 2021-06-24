@@ -12,7 +12,7 @@ import {defaultToken,
 
 
 describe('All pages test', () => {
-    before(() => {
+    before('Set AUTH_TOKEN', () => {
         cy.setCookie('AUTH_TOKEN', defaultToken)
         cy.visit('https://dev-skillmaster-web.np.logitech.io')
     })
