@@ -5,18 +5,16 @@ import {defaultToken,
         profileKeyWeakness,
         profileKeyStrength, 
         baselineKeyWeakness, 
-        baselineKeyStrength
+        baselineKeyStrength,
+        setAuthToken
 
     } from "./variables";
 
 
 
-describe('All pages test', () => {
-    before('Set AUTH_TOKEN', () => {
-        cy.setCookie('AUTH_TOKEN', defaultToken)
-        cy.visit('https://dev-skillmaster-web.np.logitech.io')
-    })
-
+describe('Navigating to all tabs', () => {
+    setAuthToken();
+    
     describe('Playmaster', () => { 
         it('Get main menu items', () => {
        
