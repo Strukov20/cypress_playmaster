@@ -1,13 +1,15 @@
 /// <reference types="cypress" />
-import {defaultToken, 
-        defaultUrlID, 
-        memberSince, 
-        profileKeyWeakness,
-        profileKeyStrength, 
-        baselineKeyWeakness, 
-        baselineKeyStrength,
-        setAuthToken
-
+import {
+    defaultUrlID, 
+    memberSince,
+    userName,
+    currentRank,
+    currentCountry, 
+    profileKeyWeakness,
+    profileKeyStrength, 
+    baselineKeyWeakness, 
+    baselineKeyStrength,
+    setAuthToken
     } from "./variables";
 
 
@@ -29,12 +31,38 @@ describe('Navigating to all tabs', () => {
             })
         })
     })
+
+    describe('feedback form', () => {
+        it('Send feedback', () => {
+            cy.get('[class="dashboard-feedback-title"]').contains('Feedback').click()
+            cy.get('[class="dashboard-feedback-body-head show"]').contains('How would you rate your experience?')
+            cy.get('[class="dashboard-feedback-body-icons"]').first().click()
+            cy.get('[placeholder="Tell us about your experience…"]').type('Feedback test automation')
+            cy.get('[class="dashboard-feedback-body"]').contains('Send').click()
+            cy.get('[class="ant-notification-notice ant-notification-notice-info ant-notification-notice-closable"]').contains('Thanks for contacting us!')
+        })
+        setAuthToken();
+    })
     
     describe('Profile', () => { 
         it('Play now tooltip', () => {
             cy.get('[class="cta-message-text___3_ZAU"]').contains(`Challenge your ${profileKeyWeakness} to improve your play`)
         })
-    
+
+        it('Get current RANK', () => {
+            cy.get('[class="profile-rank___3kRrg"]').contains(`Rank ${currentRank}`)
+        })
+
+        it('Get UserName', () => {
+            cy.get('[class="username___3ERcP"]').contains(`${userName}`)
+        })
+
+        it('Get registration info', () => {
+            cy.get('[class="info___23G8L"]').contains(`Member since ${memberSince}`)
+            cy.get('[class="info___23G8L"]').contains('Early access member')
+            cy.get('[class="info___23G8L"]').contains(`${currentCountry}`)
+        })
+ 
         it('get widgets from Profile page', () => {
             cy.get(`[href="/profile/${defaultUrlID}"]`).contains('Profile').click()
             cy.get('[class="dashboard-summary___1El0q dashboard-summary"]').contains('Global Score')
